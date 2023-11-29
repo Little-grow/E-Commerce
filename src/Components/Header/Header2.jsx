@@ -73,7 +73,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Header2 = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(0);
     const open = Boolean(anchorEl);
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
@@ -114,7 +114,7 @@ return (
         component="nav"
         aria-label="Device settings"
           // @ts-ignore
-        sx={{ bgcolor: theme.palette.catigory.main, p: "0px" }}
+        sx={{ bgcolor: theme.palette.myColor.main, p: "0px", borderLeft: "1px solid #777" }}
         >
         <ListItem
         sx={{width: "150px", textAlign: "center", "&:hover": {cursor: "pointer"}}}

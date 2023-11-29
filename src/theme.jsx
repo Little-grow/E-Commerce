@@ -9,7 +9,7 @@ const getDesignTokens = (mode) => ({
     ...(mode === "light"
       ? {
           // palette values for light mode
-          catigory: {
+          myColor: {
             main: "#efefef",
           },
           text: {
@@ -25,7 +25,7 @@ const getDesignTokens = (mode) => ({
         }
       : {
           // palette values for dark mode
-          catigory: {
+          myColor: {
             main: "#3e3e3e",
           },
           neutral: {
