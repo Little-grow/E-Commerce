@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Box, Container, Typography, useTheme, IconButton, ListItemIcon, ListItemText, Drawer } from "@mui/material";
+import { Box, Container, Typography, useTheme, IconButton, ListItemIcon, ListItemText, Drawer, List, ListItem, ListItemButton } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -12,7 +12,11 @@ import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import LaptopWindowsIcon from "@mui/icons-material/LaptopWindows";
 import TwoWheelerOutlinedIcon from "@mui/icons-material/TwoWheelerOutlined";
-import { Close, ContentCut } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
 const Header3 = () => {
     const theme = useTheme()
@@ -25,18 +29,6 @@ const Header3 = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  
-
-
-
-
-
-
-
-
-
-
 
   const [state, setState] = useState({
     top: false,
@@ -159,13 +151,65 @@ const Header3 = () => {
         anchor={"top"}
         open={state["top"]}
         onClose={toggleDrawer("top", false)}
-        sx={{".MuiPaper-root": {height: "100%"}}}
+        sx={{
+          ".MuiPaper-root.css-1sozasi-MuiPaper-root-MuiDrawer-paper": {
+            height: "100%",
+          },
+        }}
       >
-        dfgfdgffd
-        <Box>
-            <IconButton aria-label="" onClick={toggleDrawer("top", false)}>
-                <Close />
-            </IconButton>
+        <Box
+          sx={{
+            width: "444px",
+            m: "50px auto",
+            position: "relative",
+            pt: 10,
+          }}
+        >
+          <IconButton
+            sx={{ ":hover": {color: "red", rotate: "180deg", transition: "0.2s"}, position: "absolute",  top: 0, right: 0,}}
+            aria-label=""
+            onClick={toggleDrawer("top", false)}
+          >
+            <Close />
+          </IconButton>
+
+          {[
+            { mainLink: "Home", subLink: ["link1", "link2", "link3"] },
+            { mainLink: "Mage Menu", subLink: ["link1", "link2", "link3"] },
+            { mainLink: "Full Screan Menu", subLink: ["link1", "link2", "link3"] },
+            { mainLink: "Pages", subLink: ["link1", "link2", "link3"] },
+            { mainLink: "User Account", subLink: ["link1", "link2", "link3"] },
+            { mainLink: "Vendor Account", subLink: ["link1", "link2", "link3"] }
+          ].map((ele) => {
+            return (
+              <Accordion
+                key={ele.mainLink}
+                elevation={0}
+                sx={{ bgcolor: "initial" }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>{ele.mainLink}</Typography>
+                </AccordionSummary>
+                <List sx={{ p: 0, m: 0 }}>
+                    {
+                        ele.subLink.map((link) => {
+                            return (
+                              <ListItem key={link} sx={{ p: 0, pl: 1, m: 0 }}>
+                                <ListItemButton>
+                                  <ListItemText primary={link} />
+                                </ListItemButton>
+                              </ListItem>
+                            );
+                      })
+                        }
+                </List>
+              </Accordion>
+            );
+          })}
         </Box>
       </Drawer>
     </Container>
