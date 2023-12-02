@@ -1,5 +1,6 @@
+// @ts-nocheck
 /* eslint-disable no-unused-vars */
-import { Box, Container, Typography, useTheme, IconButton, ListItemIcon, ListItemText, Drawer, List, ListItem, ListItemButton } from "@mui/material";
+import { Box, Container, Typography, useTheme, IconButton, ListItemIcon, ListItemText, Drawer, List, ListItem, ListItemButton, useMediaQuery, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,7 +17,7 @@ import { Close } from "@mui/icons-material";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
+import LinksHeader3 from "./LinksHeader3";
 
 const Header3 = () => {
     const theme = useTheme()
@@ -47,17 +48,6 @@ const Header3 = () => {
 
     setState({ ...state, [anchor]: open });
   };
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -143,10 +133,25 @@ const Header3 = () => {
           </MenuItem>
         </Menu>
       </Box>
+      {/* component */}
+      {
 
-      <IconButton>
-        <MenuIcon onClick={toggleDrawer("top", true)} />
-      </IconButton>
+      useMediaQuery("(min-width:1200px)") && (
+        <Stack gap={4} direction={"row"}>
+
+            <LinksHeader3 title={"Home"} />
+          <LinksHeader3 title={"Mage Menu"} />
+          <LinksHeader3 title={"Full Screan Menu"} />
+          <LinksHeader3 title={"Pages"} />
+          <LinksHeader3 title={"Vendor Account"} />
+        </Stack>
+      )
+      }
+      {useMediaQuery("(max-width:1200px)") && (
+        <IconButton>
+          <MenuIcon onClick={toggleDrawer("top", true)} />
+        </IconButton>
+      )}
       <Drawer
         anchor={"top"}
         open={state["top"]}
@@ -166,7 +171,12 @@ const Header3 = () => {
           }}
         >
           <IconButton
-            sx={{ ":hover": {color: "red", rotate: "180deg", transition: "0.2s"}, position: "absolute",  top: 0, right: 0,}}
+            sx={{
+              ":hover": { color: "red", rotate: "180deg", transition: "0.2s" },
+              position: "absolute",
+              top: 0,
+              right: 0,
+            }}
             aria-label=""
             onClick={toggleDrawer("top", false)}
           >
@@ -176,10 +186,16 @@ const Header3 = () => {
           {[
             { mainLink: "Home", subLink: ["link1", "link2", "link3"] },
             { mainLink: "Mage Menu", subLink: ["link1", "link2", "link3"] },
-            { mainLink: "Full Screan Menu", subLink: ["link1", "link2", "link3"] },
+            {
+              mainLink: "Full Screan Menu",
+              subLink: ["link1", "link2", "link3"],
+            },
             { mainLink: "Pages", subLink: ["link1", "link2", "link3"] },
             { mainLink: "User Account", subLink: ["link1", "link2", "link3"] },
-            { mainLink: "Vendor Account", subLink: ["link1", "link2", "link3"] }
+            {
+              mainLink: "Vendor Account",
+              subLink: ["link1", "link2", "link3"],
+            },
           ].map((ele) => {
             return (
               <Accordion
@@ -195,17 +211,15 @@ const Header3 = () => {
                   <Typography>{ele.mainLink}</Typography>
                 </AccordionSummary>
                 <List sx={{ p: 0, m: 0 }}>
-                    {
-                        ele.subLink.map((link) => {
-                            return (
-                              <ListItem key={link} sx={{ p: 0, pl: 1, m: 0 }}>
-                                <ListItemButton>
-                                  <ListItemText primary={link} />
-                                </ListItemButton>
-                              </ListItem>
-                            );
-                      })
-                        }
+                  {ele.subLink.map((link) => {
+                    return (
+                      <ListItem key={link} sx={{ p: 0, pl: 1, m: 0 }}>
+                        <ListItemButton>
+                          <ListItemText primary={link} />
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
                 </List>
               </Accordion>
             );
