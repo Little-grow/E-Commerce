@@ -27,7 +27,6 @@ function LinksHeader3({ title }) {
       >
         <Typography variant="body1">{title}</Typography>
         <ExpandMore />
-
         <Box
           className="show-links"
           sx={{
